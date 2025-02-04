@@ -33,7 +33,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+    <div className="flex flex-col items-center py-6 min-h-screen bg-gray-100 p-4">
       <h2 className="text-2xl mb-6">Enter city to get coordinates</h2>
       <input
         onChange={handleChange}
