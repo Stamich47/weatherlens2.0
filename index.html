@@ -10,10 +10,14 @@
       }
     </script>
 
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnBjrbvmTuUSnTs7r45X7APW7dvzwHrhY&loading=async&libraries=places&callback=initMap"
-      async
-      defer
+    <script>
+      const apiKey = import.meta.env.VITE_PLACES_API; // Replace this with the actual method to get your environment variable
+      const script = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&loading=async&libraries=places&callback=initMap`;
+      script.async = true;
+      script.defer = true;
+      document.head.appendChild(script);
+    </script>
     ></script>
   </head>
   <body>
