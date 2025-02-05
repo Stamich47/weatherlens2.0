@@ -4,6 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WeatherLens 2.0</title>
+    <script>
+      function initMap() {
+        console.log("Google Maps API loaded");
+      }
+    </script>
+
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnBjrbvmTuUSnTs7r45X7APW7dvzwHrhY&loading=async&libraries=places&callback=initMap"
+      async
+      defer
+    ></script>
   </head>
   <body>
     <div id="root"></div>
