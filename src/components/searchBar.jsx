@@ -38,6 +38,7 @@ export default function SearchBar({ handleChange, handleClick }) {
             inputRef.current.placeholder = "Enter a city";
           } else {
             inputRef.current.value = place.formatted_address;
+            console.log(place);
           }
         };
 
@@ -62,7 +63,7 @@ export default function SearchBar({ handleChange, handleClick }) {
         ref={inputRef}
         onChange={handleChange}
         type="text"
-        placeholder="Enter city"
+        placeholder="Enter city or zip code"
         className="border border-gray-300 rounded-md p-2 mb-4 w-full max-w-md"
         id="autocomplete"
       />

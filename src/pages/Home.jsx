@@ -27,7 +27,6 @@ export default function Home() {
 
   const handleChange = (e) => {
     setCity(e.target.value);
-    console.log(city);
   };
 
   const handleClick = (e) => {
@@ -48,7 +47,7 @@ export default function Home() {
             onCoordsFetched={setCoords}
             coords={coords}
           />
-          <WeatherFetcher coords={coords} />
+          <WeatherFetcher coords={coords} city={city} />
         </div>
       ) : (
         queryCity &&
