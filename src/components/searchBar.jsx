@@ -57,14 +57,16 @@ export default function SearchBar({ handleChange, handleClick }) {
   }, [handleChange]);
 
   return (
-    <div className="flex flex-col items-center">
-      <h2 className="text-2xl mb-6">Enter city to get coordinates</h2>
+    <form
+      onSubmit={handleClick}
+      className="flex flex items-center justify-center gap-2"
+    >
       <input
         ref={inputRef}
         onChange={handleChange}
         type="text"
         placeholder="Enter city or zip code"
-        className="border border-gray-300 rounded-md p-2 mb-4 w-full max-w-md"
+        className="border border-gray-300 rounded-md p-2 w-full max-w-md"
         id="autocomplete"
       />
       <button
@@ -74,6 +76,6 @@ export default function SearchBar({ handleChange, handleClick }) {
       >
         Submit
       </button>
-    </div>
+    </form>
   );
 }
