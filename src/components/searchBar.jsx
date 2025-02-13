@@ -17,7 +17,13 @@ export default function SearchBar({ handleChange, setQueryCity }) {
     };
 
     const initAutocomplete = () => {
-      if (inputRef.current && !autoRef.current) {
+      if (
+        inputRef.current &&
+        !autoRef.current &&
+        window.google &&
+        window.google.maps &&
+        window.google.maps.places
+      ) {
         autoRef.current = new window.google.maps.places.Autocomplete(
           inputRef.current,
           {
@@ -41,12 +47,27 @@ export default function SearchBar({ handleChange, setQueryCity }) {
 
     if (!window.google) {
       loadScript(
-        "https://maps.googleapis.com/maps/api/js?key=AIzaSyBnBjrbvmTuUSnTs7r45X7APW7dvzwHrhY&libraries=places",
+        `https://maps.googleapis.com/maps/api/js?key=${
+          import.meta.env.VITE_PLACES_API
+        }&libraries=places&callback=initMap&loading=async`,
         initAutocomplete
       );
     } else {
       initAutocomplete();
     }
+
+    // Add input event listener to update state as you type
+    const inputElement = inputRef.current;
+    if (inputElement) {
+      inputElement.addEventListener("input", handleChange);
+    }
+
+    // Cleanup event listener on unmount
+    return () => {
+      if (inputElement) {
+        inputElement.removeEventListener("input", handleChange);
+      }
+    };
   }, [handleChange]);
 
   return (
