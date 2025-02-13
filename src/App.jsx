@@ -20,7 +20,11 @@ function App() {
   return (
     <>
       <Header />
-      <Navbar handleChange={handleChange} handleClick={handleClick} />
+      <Navbar
+        setQueryCity={setQueryCity}
+        handleChange={handleChange}
+        handleClick={handleClick}
+      />
       <Home city={city} queryCity={queryCity} />
     </>
   );

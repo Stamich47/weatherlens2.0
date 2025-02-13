@@ -16,7 +16,6 @@ export default function Home({ queryCity, city }) {
         lon: data[0].lon,
         name: data[0].display_name,
       });
-      console.log(data);
     } else {
       setCoords(null);
     }

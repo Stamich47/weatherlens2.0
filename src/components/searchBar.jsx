@@ -1,7 +1,9 @@
 import { useEffect, useRef } from "react";
+import { FaSearch } from "react-icons/fa";
 
-export default function SearchBar({ handleChange, handleClick }) {
+export default function SearchBar({ handleChange, setQueryCity }) {
   const inputRef = useRef(null);
+  const autoRef = useRef(null);
 
   useEffect(() => {
     const loadScript = (url, callback) => {
@@ -15,34 +17,25 @@ export default function SearchBar({ handleChange, handleClick }) {
     };
 
     const initAutocomplete = () => {
-      if (inputRef.current) {
-        const autocomplete = new window.google.maps.places.Autocomplete(
+      if (inputRef.current && !autoRef.current) {
+        autoRef.current = new window.google.maps.places.Autocomplete(
           inputRef.current,
           {
             types: ["(regions)"],
           }
         );
-        autocomplete.addListener("place_changed", () => {
-          const place = autocomplete.getPlace();
+
+        const onPlaceChanged = () => {
+          const place = autoRef.current.getPlace();
           if (!place.geometry) {
             inputRef.current.placeholder = "Enter a city";
           } else {
             inputRef.current.value = place.formatted_address;
             handleChange({ target: { value: place.formatted_address } });
           }
-        });
-
-        const onPlaceChanged = () => {
-          const place = autocomplete.getPlace();
-          if (!place.geometry) {
-            inputRef.current.placeholder = "Enter a city";
-          } else {
-            inputRef.current.value = place.formatted_address;
-            console.log(place);
-          }
         };
 
-        autocomplete.addListener("place_changed", onPlaceChanged);
+        autoRef.current.addListener("place_changed", onPlaceChanged);
       }
     };
 
@@ -58,7 +51,10 @@ export default function SearchBar({ handleChange, handleClick }) {
 
   return (
     <form
-      onSubmit={handleClick}
+      onSubmit={(e) => {
+        e.preventDefault();
+        setQueryCity(inputRef.current.value);
+      }}
       className="flex flex items-center justify-center gap-2"
     >
       <input
@@ -66,15 +62,14 @@ export default function SearchBar({ handleChange, handleClick }) {
         onChange={handleChange}
         type="text"
         placeholder="Enter city or zip code"
-        className="border border-gray-300 rounded-md p-2 w-full max-w-md"
+        className="border border-gray-300 rounded-full px-2 py-1 w-full max-w-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300"
         id="autocomplete"
       />
       <button
-        onClick={handleClick}
         type="submit"
-        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300"
+        className="bg-blue-500 text-white px-2 py-2 rounded-full hover:bg-blue-600 transition duration-300"
       >
-        Submit
+        <FaSearch />
       </button>
     </form>
   );

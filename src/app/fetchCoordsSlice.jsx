@@ -1,4 +1,3 @@
-// filepath: /c:/Users/stanf/Documents/coding/repos/projects/weatherlens_2025/src/app/fetchCoordsSlice.jsx
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const GEO_KEY = import.meta.env.VITE_GEO_API;

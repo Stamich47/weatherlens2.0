@@ -1,11 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function CoordsFetcher({ data, onCoordsFetched, coords }) {
-  const [allCities, setAllCities] = useState([]);
-
   useEffect(() => {
     if (data && data.length > 0) {
-      setAllCities(data);
       onCoordsFetched({
         lat: data[0].lat,
         lon: data[0].lon,
@@ -15,10 +12,6 @@ export default function CoordsFetcher({ data, onCoordsFetched, coords }) {
       onCoordsFetched(null);
     }
   }, [data, onCoordsFetched]);
-
-  useEffect(() => {
-    console.log(allCities);
-  }, [allCities]);
 
   return (
     <div>
